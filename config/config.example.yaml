@@ -1,0 +1,107 @@
+# HyperEternalAgent 配置示例
+# 复制此文件为 config.yaml 并修改相应配置
+
+system:
+  name: "HyperEternalAgent"
+  version: "1.0.0"
+
+  runtime:
+    max_workers: 10
+    task_timeout: 3600
+    heartbeat_interval: 30
+
+  persistence:
+    backend: "redis"
+    url: "redis://localhost:6379/0"
+    checkpoint_interval: 300
+
+  llm:
+    default_provider: "openai"
+    providers:
+      openai:
+        api_key: "${OPENAI_API_KEY}"
+        models:
+          - gpt-4
+          - gpt-3.5-turbo
+      anthropic:
+        api_key: "${ANTHROPIC_API_KEY}"
+        models:
+          - claude-3-opus
+          - claude-3-sonnet
+
+  monitoring:
+    enabled: true
+    metrics_port: 9090
+    log_level: "INFO"
+    log_file: "./logs/hypereternal.log"
+
+  notifications:
+    enabled: false
+    channels:
+      - type: "email"
+        config:
+          smtp_host: "smtp.example.com"
+          smtp_port: 587
+      - type: "slack"
+        config:
+          webhook_url: "https://hooks.slack.com/services/xxx"
+
+# Agent 默认配置
+agents:
+  default_config:
+    llm:
+      temperature: 0.3
+      max_tokens: 4000
+    retry:
+      max_retries: 3
+      backoff_factor: 2.0
+
+# 编排配置
+orchestration:
+  flow_engine:
+    max_concurrent_flows: 100
+    default_timeout: 3600
+    checkpoint_interval: 60
+
+  task_router:
+    default_pool: "general"
+    load_balancer:
+      strategy: "least_connections"
+
+  scheduler:
+    enabled: true
+    max_jobs: 1000
+
+# 自省配置
+reflection:
+  quality_assurance:
+    enabled: true
+    dimensions:
+      - name: correctness
+        weight: 1.0
+        threshold: 0.8
+
+  auto_correction:
+    enabled: true
+    strategy: guided
+    max_iterations: 5
+
+  feedback_loop:
+    max_iterations: 5
+    convergence_threshold: 0.95
+    min_improvement: 0.01
+
+# 持久化配置
+persistence:
+  state_manager:
+    default_scope: global
+    cache_size: 10000
+
+  task_queue:
+    max_size: 10000
+    visibility_timeout: 300
+
+  checkpoint:
+    enabled: true
+    storage_path: ./checkpoints
+    max_snapshots: 10
