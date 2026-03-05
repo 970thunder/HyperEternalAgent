@@ -1,0 +1,11 @@
+<script setup lang="ts">
+import MainLayout from './components/MainLayout.vue'
+</script>
+
+<template>
+  <MainLayout />
+</template>
+
+<style>
+@import './assets/styles/main.css';
+</style>
