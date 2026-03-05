@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from ..core.exceptions import StorageConnectionError, StorageError, StorageOperationError
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 
 logger = get_logger(__name__)
 

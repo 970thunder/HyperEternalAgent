@@ -11,7 +11,7 @@ from typing import Any, Callable, Dict, List, Optional, Set
 
 from ..core.exceptions import QueueEmptyError, QueueFullError, TaskDependencyError, TaskError
 from ..core.types import Task, TaskResult, TaskStatus, generate_id
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 from .storage import StorageBackend
 
 logger = get_logger(__name__)

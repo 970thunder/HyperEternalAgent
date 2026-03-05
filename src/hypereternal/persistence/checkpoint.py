@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional
 
 from ..core.exceptions import ChecksumMismatchError, SnapshotError
 from ..core.types import StateScope, generate_id
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 from .state_manager import StateManager
 from .task_queue import TaskQueue
 

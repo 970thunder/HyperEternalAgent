@@ -10,7 +10,7 @@ from typing import Any, Callable, Dict, List, Optional, Type
 from ..core.exceptions import AgentError, AgentNotFoundError
 from ..core.types import AgentState, AgentType
 from .base import BaseAgent
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 
 logger = get_logger(__name__)
 

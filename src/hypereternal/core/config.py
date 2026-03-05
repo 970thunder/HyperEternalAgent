@@ -44,8 +44,8 @@ class AgentConfig:
 class PersistenceConfig:
     """Persistence configuration."""
 
-    backend: str = "redis"
-    url: str = "redis://localhost:6379/0"
+    backend: str = "memory"
+    url: str = ""
     checkpoint_interval: int = 300
     max_snapshots: int = 10
 

@@ -11,7 +11,7 @@ from typing import Any, Callable, Dict, List, Optional
 from ..core.exceptions import AgentError, AgentExecutionError, AgentInitializationError
 from ..core.types import AgentState, AgentType, Task, TaskResult, generate_id
 from ..infrastructure.llm_client import LLMClientWrapper
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Set
 
 from ..core.types import StateScope, generate_id
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 from .storage import StorageBackend
 
 logger = get_logger(__name__)

@@ -35,8 +35,11 @@ dev = [
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+packages = ["hypereternal", "hypereternal.core", "hypereternal.agents", "hypereternal.orchestration", "hypereternal.persistence", "hypereternal.reflection", "hypereternal.infrastructure", "hypereternal.web", "hypereternal.applications", "hypereternal.applications.coding", "hypereternal.applications.paper"]
+
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.black]
 line-length = 100

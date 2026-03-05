@@ -4,7 +4,14 @@
       "Bash(git init:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pip install:*)",
+      "Bash(python -c:*)",
+      "Bash(find . -name \"*.py\" -exec sed -i 's/from \\\\.logging import/from ..infrastructure.logging import/g' {} ;)",
+      "Bash(python -m pytest tests/test_core_types.py -v)",
+      "Bash(python -m pytest:*)",
+      "Bash(ls -la src/hypereternal/*/)",
+      "Bash(timeout 10 python -m hypereternal.web.api)"
     ]
   }
 }

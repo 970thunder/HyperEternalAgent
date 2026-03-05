@@ -1,196 +1,269 @@
 # HyperEternalAgent
 
-> 多Agent持久运行框架 - 支持构建24/7不间断运行的智能系统
+> Multi-Agent Persistent Running Framework - Building 24/7 Autonomous Intelligent Systems
 
-## 项目简介
+## Overview
 
-HyperEternalAgent 是一个多Agent持久运行框架，旨在支持构建能够长时间（数天、数周甚至数月）不间断运行的智能系统。该框架的核心特性包括：
+HyperEternalAgent is a multi-agent persistent running framework designed to support the development of intelligent systems that can run continuously for extended periods (days, weeks, or even months). Key features include:
 
-- **持久运行**：支持24/7不间断运行，具备故障恢复和断点续传能力
-- **自我进化**：通过自省机制不断优化输出质量
-- **灵活编排**：支持YAML配置化的Agent编排和流程定义
-- **高可用性**：完善的错误处理、重试机制和熔断保护
+- **Persistent Operation**: 24/7 continuous operation with fault recovery and checkpoint support
+- **Self-Evolution**: Continuous quality improvement through reflection mechanisms
+- **Flexible Orchestration**: YAML-based agent orchestration and workflow definition
+- **High Availability**: Comprehensive error handling, retry mechanisms, and circuit breaker protection
+- **Web Dashboard**: Real-time visualization and management interface
 
-## 核心应用场景
+## Core Applications
 
-1. **自动编程系统**：持续开发、代码审查、重构优化
-2. **论文编写系统**：文献综述、论文撰写、格式校对
-3. **数据分析系统**：持续监控、报告生成、趋势分析
-4. **内容创作系统**：文章生成、质量审核、迭代改进
+1. **Auto-Programming System**: Continuous development, code review, and refactoring
+2. **Paper Writing System**: Literature review, paper drafting, and format verification
+3. **Data Analysis System**: Continuous monitoring, report generation, trend analysis
+4. **Content Creation System**: Article generation, quality review, iterative improvement
 
-## 架构概览
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    HyperEternalAgent Framework                   │
 ├─────────────────────────────────────────────────────────────────┤
-│  Application Layer   │  自动编程  │  论文编写  │  自定义应用     │
+│  Application Layer   │  Auto-Programming  │  Paper Writing  │    │
 ├─────────────────────────────────────────────────────────────────┤
-│  Orchestration Layer │  流程引擎  │  任务路由  │  配置管理       │
+│  Web Interface       │  Dashboard  │  REST API  │  WebSocket    │
 ├─────────────────────────────────────────────────────────────────┤
-│  Agent Layer         │  Worker   │  Reviewer │  Planner  │ Critic│
+│  Orchestration Layer │  Flow Engine  │  Task Router  │  Config  │
 ├─────────────────────────────────────────────────────────────────┤
-│  Reflection Layer    │  质量保证  │  错误检测  │  自动更正       │
+│  Agent Layer         │  Worker  │  Reviewer  │  Planner  │ Critic│
 ├─────────────────────────────────────────────────────────────────┤
-│  Persistence Layer   │  状态管理  │  任务队列  │  检查点系统     │
+│  Reflection Layer    │  Quality  │  Error Detection  │  LLM Eval │
 ├─────────────────────────────────────────────────────────────────┤
-│  Infrastructure Layer│  LLM客户端 │  监控系统  │  日志系统       │
+│  Persistence Layer   │  State Manager  │  Task Queue  │  Checkpoint│
+├─────────────────────────────────────────────────────────────────┤
+│  Infrastructure Layer│  LLM Client  │  Monitoring  │  Logging   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 HyperEternalAgent/
-├── docs/                           # 文档目录
-│   ├── architecture/               # 架构文档
-│   │   └── README.md               # 核心架构设计
-│   ├── design/                     # 设计文档
-│   │   ├── agent_system.md         # Agent系统设计
-│   │   ├── reflection_system.md    # 自省机制设计
-│   │   ├── orchestration_system.md # 编排系统设计
-│   │   └── persistence_system.md   # 持久层设计
-│   └── api/                        # API文档
-├── src/                            # 源代码目录
-│   ├── core/                       # 核心模块
-│   ├── agents/                     # Agent实现
-│   ├── orchestration/              # 编排系统
-│   ├── reflection/                 # 自省系统
-│   ├── persistence/                # 持久层
-│   ├── infrastructure/             # 基础设施
-│   └── applications/               # 应用实现
-│       ├── coding/                 # 自动编程应用
-│       └── paper/                  # 论文编写应用
-├── examples/                       # 示例代码
-├── tests/                          # 测试代码
-├── config/                         # 配置文件
-│   ├── flows/                      # 流程定义
-│   └── agents/                     # Agent配置
-└── README.md                       # 项目说明
+├── docs/                           # Documentation
+│   ├── architecture/               # Architecture docs
+│   ├── design/                     # Design docs
+│   └── api/                        # API reference
+├── src/                            # Source code
+│   ├── core/                       # Core module (types, config, exceptions)
+│   ├── agents/                     # Agent implementations
+│   ├── orchestration/              # Orchestration (flow engine, task router)
+│   ├── reflection/                 # Reflection system (quality, correction)
+│   ├── persistence/                # Persistence (storage, state, queue)
+│   ├── infrastructure/             # Infrastructure (LLM, logging)
+│   └── web/                        # Web interface
+├── examples/                       # Example applications
+│   ├── auto_programming_system.py  # Auto-programming example
+│   └── paper_writing_system.py     # Paper writing example
+├── tests/                          # Test suite
+├── config/                         # Configuration files
+└── README.md                       # This file
 ```
 
-## 快速开始
+## Quick Start
 
-### 环境要求
+### Requirements
 
 - Python 3.10+
-- Redis 7.0+
-- PostgreSQL 15+ (可选)
+- Redis 7.0+ (optional, for distributed operation)
+- PostgreSQL 15+ (optional, for persistent storage)
 
-### 安装
+### Installation
 
 ```bash
-# 克隆仓库
-git clone https://github.com/yourusername/HyperEternalAgent.git
+# Clone repository
+git clone https://github.com/970thunder/HyperEternalAgent.git
 cd HyperEternalAgent
 
-# 创建虚拟环境
+# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 # or
 .\venv\Scripts\activate   # Windows
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
+
+# Install package in development mode
+pip install -e .
 ```
 
-### 配置
+### Basic Usage
+
+```python
+import asyncio
+from hypereternal import HyperEternalAgent, SystemConfig, Task
+
+async def main():
+    # Create and start system
+    config = SystemConfig(name="MySystem", version="1.0.0")
+    system = HyperEternalAgent(config=config)
+    await system.start()
+
+    # Submit a task
+    submission = await system.submit_task(
+        task_type="code_generation",
+        payload={"prompt": "Write a function to sort a list"},
+    )
+
+    # Wait for result
+    result = await system.wait_for_completion(submission.task_id)
+    print(f"Result: {result.output}")
+
+    # Stop system
+    await system.stop()
+
+asyncio.run(main())
+```
+
+### Run Web Dashboard
 
 ```bash
-# 复制配置模板
-cp config/config.example.yaml config/config.yaml
+# Start web server
+python -m hypereternal.web.api
 
-# 编辑配置
-vim config/config.yaml
+# Or using uvicorn
+uvicorn hypereternal.web.api:app --host 0.0.0.0 --port 8000
 ```
 
-### 运行示例
+Then open http://localhost:8000 in your browser.
+
+### Run Examples
 
 ```bash
-# 运行自动编程示例
-python -m src.applications.coding --project my_project
+# Run auto-programming example
+python examples/auto_programming_system.py
 
-# 运行论文编写示例
-python -m src.applications.paper --topic "AI Research"
+# Run paper writing example
+python examples/paper_writing_system.py
 ```
 
-## 文档索引
+## Core Concepts
 
-### 架构文档
-- [核心架构设计](docs/architecture/README.md) - 整体架构和设计原则
+### Agent Types
 
-### 设计文档
-- [Agent系统设计](docs/design/agent_system.md) - Agent模型、生命周期和通信机制
-- [自省机制设计](docs/design/reflection_system.md) - 质量保证、错误检测和自动更正
-- [编排系统设计](docs/design/orchestration_system.md) - 流程引擎、任务路由和配置管理
-- [持久层设计](docs/design/persistence_system.md) - 状态管理、任务队列和检查点系统
+| Type | Responsibility | Example |
+|------|---------------|---------|
+| WorkerAgent | Execute tasks | CodeGeneratorAgent, ResearchAgent |
+| ReviewerAgent | Review output quality | QualityReviewerAgent |
+| PlannerAgent | Plan task workflows | TaskPlannerAgent |
+| CriticAgent | Evaluate overall performance | PerformanceCriticAgent |
+| CoordinatorAgent | Coordinate multiple agents | SupervisorAgent |
 
-## 核心概念
+### Flow Types
 
-### Agent (智能体)
+Flow defines how agents collaborate:
 
-Agent是框架的基本执行单元，分为以下类型：
+- **Sequential**: Steps execute in order
+- **Parallel**: Multiple steps execute simultaneously
+- **Condition**: Branch based on conditions
+- **Loop**: Repeat until condition met
 
-| 类型 | 职责 | 示例 |
-|------|------|------|
-| WorkerAgent | 执行具体任务 | CodeWriterAgent, ResearchAgent |
-| ReviewerAgent | 审核输出质量 | QualityReviewerAgent, SecurityReviewerAgent |
-| PlannerAgent | 规划任务流程 | TaskPlannerAgent, ResourcePlannerAgent |
-| CriticAgent | 评估整体表现 | PerformanceCriticAgent, QualityCriticAgent |
-| CoordinatorAgent | 协调多个Agent | MasterAgent, SupervisorAgent |
+### Reflection System
 
-### Flow (流程)
+The reflection system ensures output quality:
 
-Flow定义了Agent之间的协作方式，支持：
+1. **Quality Assessment**: Multi-dimensional quality scoring
+2. **Error Detection**: Static analysis and runtime monitoring
+3. **Auto-Correction**: Intelligent fix suggestions
+4. **Iterative Improvement**: Continuous optimization until standards met
 
-- **顺序执行**：步骤按顺序依次执行
-- **并行执行**：多个步骤同时执行
-- **条件分支**：根据条件选择执行路径
-- **循环迭代**：重复执行直到满足条件
+## API Reference
 
-### Self-Reflection (自省)
+See [API Documentation](docs/api/README.md) for detailed API reference.
 
-自省机制确保输出质量：
+### Key Endpoints
 
-1. **质量评估**：多维度评估输出质量
-2. **错误检测**：静态分析和运行时监控
-3. **自动更正**：智能修复和优化建议
-4. **迭代改进**：持续优化直到满足标准
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/system/status` | GET | Get system status |
+| `/api/tasks` | POST | Create a new task |
+| `/api/tasks/{task_id}` | GET | Get task status |
+| `/api/agents` | GET | List all agents |
+| `/api/flows` | POST | Execute a flow |
 
-## 开发路线图
+## Configuration
 
-### Phase 1: 核心框架 (当前)
-- [x] 架构设计
-- [ ] 基础Agent系统
-- [ ] 简单任务队列
-- [ ] 基本持久化
+Create a `config.yaml` file:
 
-### Phase 2: 自省系统
-- [ ] 质量评估引擎
-- [ ] 错误检测引擎
-- [ ] 自动更正引擎
-- [ ] 反馈循环
+```yaml
+name: MySystem
+version: 1.0.0
 
-### Phase 3: 编排系统
-- [ ] Flow DSL解析器
-- [ ] Flow执行引擎
-- [ ] 任务路由器
-- [ ] 调度器
+runtime:
+  max_workers: 10
+  task_timeout: 3600
+  heartbeat_interval: 30
 
-### Phase 4: 应用生态
-- [ ] 自动编程应用
-- [ ] 论文编写应用
-- [ ] 插件系统
+persistence:
+  backend: redis
+  url: redis://localhost:6379/0
 
-## 贡献指南
+monitoring:
+  enabled: true
+  metrics_port: 9090
+  log_level: INFO
 
-欢迎贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详情。
+llm:
+  openai:
+    provider: openai
+    model: gpt-4
+    api_key: ${OPENAI_API_KEY}
+```
 
-## 许可证
+## Testing
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
+```bash
+# Run all tests
+pytest tests/
 
-## 联系方式
+# Run with coverage
+pytest tests/ --cov=src --cov-report=html
 
-- 问题反馈：[GitHub Issues](https://github.com/yourusername/HyperEternalAgent/issues)
-- 讨论交流：[GitHub Discussions](https://github.com/yourusername/HyperEternalAgent/discussions)
+# Run specific test file
+pytest tests/test_core_types.py
+```
+
+## Development Roadmap
+
+### Phase 1: Core Framework ✅
+- [x] Architecture design
+- [x] Base agent system
+- [x] Task queue
+- [x] Basic persistence
+- [x] Unit tests
+
+### Phase 2: Reflection System ✅
+- [x] Quality assessment engine
+- [x] Error detection engine
+- [x] Auto-correction engine
+- [x] LLM-based evaluation
+- [x] Deep reflection
+- [x] Self-evolution
+
+### Phase 3: Web Interface ✅
+- [x] REST API
+- [x] WebSocket support
+- [x] Dashboard UI
+
+### Phase 4: Applications ✅
+- [x] Auto-programming system
+- [x] Paper writing system
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+- Issues: [GitHub Issues](https://github.com/970thunder/HyperEternalAgent/issues)
+- Discussions: [GitHub Discussions](https://github.com/970thunder/HyperEternalAgent/discussions)

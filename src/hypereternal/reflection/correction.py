@@ -11,7 +11,7 @@ from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from ..core.types import ErrorCategory, generate_id
-from .logging import get_logger
+from ..infrastructure.logging import get_logger
 
 logger = get_logger(__name__)
 
